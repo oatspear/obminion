@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/board/TopBench.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/board/TopGraveyard.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/board/PlayerView.gd" type="Script" id=3]
+
+[node name="PlayerView" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Graveyard" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 48 )
+
+[node name="Bench" parent="." instance=ExtResource( 1 )]
+position = Vector2( 144, 0 )
+[connection signal="tile_selected" from="Graveyard" to="." method="_on_Graveyard_tile_selected"]
+[connection signal="tile_selected" from="Bench" to="." method="_on_Bench_tile_selected"]

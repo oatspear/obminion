@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/fonts/pixel_font_xl.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/pixel_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/ui/title/TitleScreen.gd" type="Script" id=3]
+
+[node name="TitleScreen" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 713.0
+margin_bottom = 1273.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer"]
+margin_left = 179.0
+margin_top = 551.0
+margin_right = 527.0
+margin_bottom = 715.0
+
+[node name="TitleLabel" type="Label" parent="Panel/CenterContainer/VBoxContainer"]
+margin_right = 348.0
+margin_bottom = 120.0
+mouse_filter = 1
+custom_fonts/font = ExtResource( 1 )
+text = "OBMINION"
+
+[node name="PressButtonLabel" type="Label" parent="Panel/CenterContainer/VBoxContainer"]
+margin_left = 94.0
+margin_top = 124.0
+margin_right = 254.0
+margin_bottom = 164.0
+mouse_filter = 1
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 2 )
+text = "Tap to Start"
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="ParticlesLeft" type="CPUParticles2D" parent="."]
+position = Vector2( 220, 520 )
+direction = Vector2( -1, 0 )
+initial_velocity = 720.0
+initial_velocity_random = 1.0
+scale_amount = 4.0
+hue_variation = 0.25
+hue_variation_random = 1.0
+
+[node name="ParticlesRight" type="CPUParticles2D" parent="."]
+position = Vector2( 480, 520 )
+initial_velocity = 720.0
+initial_velocity_random = 1.0
+scale_amount = 4.0
+hue_variation = 0.25
+hue_variation_random = 1.0
+
+[connection signal="gui_input" from="." to="." method="_on_TitleScreen_gui_input"]

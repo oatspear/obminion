@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scripts/data/Minion.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+uid = 2
+name = "Minion2"
+power = 1
+health = 2
+movement = 2

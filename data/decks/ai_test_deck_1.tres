@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://scripts/data/PlayerDeck.gd" type="Script" id=1]
+[ext_resource path="res://data/minions/Minion1.tres" type="Resource" id=2]
+[ext_resource path="res://data/commanders/Commander1.tres" type="Resource" id=3]
+[ext_resource path="res://data/minions/Minion2.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+name = "AI Player"
+commander = ExtResource( 3 )
+minions = [ ExtResource( 2 ), ExtResource( 4 ) ]
+spells = [  ]

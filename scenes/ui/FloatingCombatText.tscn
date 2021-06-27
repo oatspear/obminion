@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/ui/FloatingCombatText.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/Fipps-Regular.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[node name="FCT" type="Label"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -26.0
+margin_top = -7.0
+margin_right = 26.0
+margin_bottom = 7.0
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 1 )
+text = "Damage"
+align = 1
+valign = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
