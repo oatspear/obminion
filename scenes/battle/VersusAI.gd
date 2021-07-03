@@ -181,3 +181,5 @@ func _logic_events():
     assert(err == OK)
     err = logic.connect("minion_exited_graveyard", scene, "on_minion_exited_graveyard")
     assert(err == OK)
+    err = logic.connect("player_updated_indicators", scene, "on_player_updated_indicators")
+    assert(err == OK)

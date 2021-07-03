@@ -10,6 +10,7 @@ var species: Resource = null
 var health: int = 1
 var power: int = 1
 var movement: int = 1
+var supply_cost: int = 1
 var location: int = Global.BoardLocation.BENCH
 var position: int = 0
 var is_token: bool = false
@@ -53,3 +54,4 @@ func reset_stats():
     health = species.health
     power = species.power
     movement = species.movement
+    supply_cost = species.supply_cost

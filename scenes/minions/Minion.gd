@@ -21,6 +21,7 @@ var species_name: String = "Minion"
 var power: int = 1
 var health: int = 1
 var movement: int = 1
+var supply_cost: int = 1
 var player_owner: int = -1
 var minion_index: int = -1
 var board_location: int = Global.BoardLocation.NONE
@@ -37,6 +38,7 @@ func set_state(state: Reference):
     power = state.power
     health = state.health
     movement = state.movement
+    supply_cost = state.supply_cost
     player_owner = state.owner
     minion_index = state.index
     species_uid = state.species.uid

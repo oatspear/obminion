@@ -9,3 +9,4 @@ name = "Minion2"
 power = 1
 health = 2
 movement = 2
+supply_cost = 1

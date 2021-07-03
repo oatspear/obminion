@@ -79,6 +79,7 @@ signal minion_entered_graveyard(pi, mi, gi)
 signal minion_exited_battlefield(pi, mi, ti)
 signal minion_exited_bench(pi, mi, bi)
 signal minion_exited_graveyard(pi, mi, gi)
+signal player_updated_indicators(pi, nh, nr, nsa, nsu)
 
 ################################################################################
 # Variables
@@ -207,6 +208,7 @@ func start():
     # if there is no custom battle setup script:
     #_default_battle_setup()
     emit_signal("battle_set_up", board)
+    _update_player_supplies()
     emit_signal("battle_started")
     _who_goes_first()
     _next = BattleState.BEGIN_TURN
@@ -245,6 +247,8 @@ func spawn_benched_minion(pi: int, mi: int, ti: int, tj: int):
         return false
     var m = p.get_minion(mi)
     if not m.is_benched():
+        return false
+    if not p.has_free_supplies(m.supply_cost):
         return false
     var path = []
     if ti != tj:
@@ -359,6 +363,8 @@ func _step_action_spawn():
     emit_signal("minion_spawning", _pi, _arg_minion.position, _arg_position)
     board.remove_from_bench(_pi, _arg_minion.position)
     board.place_minion_on_battlefield(_arg_minion, _arg_position)
+    board.players[_pi].update_supplies()
+    _signal_player_indicators(board.players[_pi])
     board.move_along_path(_arg_position, _arg_path)
     emit_signal("main_phase_ended", _pi)
     _next = BattleState.COMBAT_PHASE
@@ -498,15 +504,17 @@ func _on_exit_graveyard(minion):
 ################################################################################
 
 func _minion_death(minion: Reference):
-    emit_signal("minion_died", minion.owner, minion.index, minion.position)
-    board.remove_from_battlefield(minion.position)
     var pi = minion.owner
+    emit_signal("minion_died", pi, minion.index, minion.position)
+    board.remove_from_battlefield(minion.position)
     if board.is_graveyard_full(pi):
         emit_signal("minion_reviving", pi, 0, len(board.players[pi].bench))
         var other = board.dequeue_from_graveyard(pi)
         board.place_minion_on_bench(other)
     minion.reset_stats()
     board.place_minion_on_graveyard(minion)
+    board.players[pi].update_supplies()
+    _signal_player_indicators(board.players[_pi])
 
 
 func _end_battle():
@@ -527,3 +535,16 @@ func _who_goes_first():
         pis.append(i)
         i = (i + 1) % n
     emit_signal("turn_order_chosen", pis)
+
+func _update_player_supplies():
+    for player in board.players:
+        player.update_supplies()
+        _signal_player_indicators(player)
+
+func _signal_player_indicators(player):
+    var pi = player.index
+    var nh = player.health
+    var nr = player.resources
+    var nsa = player.supplies
+    var nsu = player.used_supplies
+    emit_signal("player_updated_indicators", pi, nh, nr, nsa, nsu)

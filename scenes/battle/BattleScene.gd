@@ -37,6 +37,7 @@ onready var battlefield = board.battlefield
 onready var object_layer = $ObjectLayer
 onready var end_turn_button = $GUILayer/EndTurn
 onready var minion_info_modal = $GUILayer/MinionInfoModal
+onready var top_panel = $GUILayer/TopPanel
 
 # animation loop
 var _animating: bool = false
@@ -378,6 +379,10 @@ func on_minion_exited_bench(pi, mi, bi):
 func on_minion_exited_graveyard(pi, mi, gi):
 # warning-ignore:function_may_yield
     _anim_queue.append(_anim_minion_exited_graveyard(pi, mi, gi))
+
+func on_player_updated_indicators(pi, nh, nr, nsa, nsu):
+# warning-ignore:function_may_yield
+    _anim_queue.append(_anim_player_updated_indicators(pi, nh, nr, nsa, nsu))
 
 
 ################################################################################
@@ -792,6 +797,15 @@ func _anim_minion_exited_graveyard(pi, mi, gi):
     minion.board_location = Global.BoardLocation.NONE
     minion.visible = false
     # FIXME reposition other minions
+    _on_animation_finished()
+
+func _anim_player_updated_indicators(pi, nh, nr, nsa, nsu):
+    yield()
+    print("[P%d] (H) %d, (R) %d, (S) %d/%d" % [pi, nh, nr, nsu, nsa])
+    if pi == _this_player:
+        top_panel.update_this_player_indicators(nh, nr, nsa, nsu)
+    else:
+        top_panel.update_enemy_player_indicators(nh, nr, nsa, nsu)
     _on_animation_finished()
 
 
