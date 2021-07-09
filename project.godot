@@ -36,8 +36,8 @@ Global="*res://scripts/Global.gd"
 
 [display]
 
-window/size/width=720
-window/size/height=800
+window/size/width=640
+window/size/height=360
 window/handheld/orientation="portrait"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"

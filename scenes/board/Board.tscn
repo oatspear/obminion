@@ -10,6 +10,7 @@
 script = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
+visible = false
 position = Vector2( 194, 268 )
 texture = ExtResource( 5 )
 
@@ -21,6 +22,7 @@ position = Vector2( -16, 128 )
 
 [node name="Bottom" parent="." instance=ExtResource( 3 )]
 position = Vector2( 96, 480 )
+
 [connection signal="bench_tile_selected" from="Top" to="." method="_on_Top_bench_tile_selected"]
 [connection signal="grave_tile_selected" from="Top" to="." method="_on_Top_grave_tile_selected"]
 [connection signal="tile_selected" from="Battlefield" to="." method="_on_Battlefield_tile_selected"]
