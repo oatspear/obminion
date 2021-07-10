@@ -45,7 +45,7 @@ position = Vector2( 0, 48 )
 adjacent = [ 0, 12 ]
 
 [node name="Tile8" parent="." instance=ExtResource( 3 )]
-position = Vector2( 48, 48 )
+position = Vector2( 72, 48 )
 adjacent = [ 0, 9, 13 ]
 
 [node name="Tile9" parent="." instance=ExtResource( 3 )]
@@ -53,7 +53,7 @@ position = Vector2( 144, 48 )
 adjacent = [ 2, 8, 10 ]
 
 [node name="Tile10" parent="." instance=ExtResource( 3 )]
-position = Vector2( 240, 48 )
+position = Vector2( 216, 48 )
 adjacent = [ 6, 9, 14 ]
 
 [node name="Tile11" parent="." instance=ExtResource( 3 )]
@@ -65,11 +65,11 @@ position = Vector2( 0, 96 )
 adjacent = [ 7, 16 ]
 
 [node name="Tile13" parent="." instance=ExtResource( 3 )]
-position = Vector2( 48, 96 )
+position = Vector2( 72, 96 )
 adjacent = [ 8, 17 ]
 
 [node name="Tile14" parent="." instance=ExtResource( 3 )]
-position = Vector2( 240, 96 )
+position = Vector2( 216, 96 )
 adjacent = [ 10, 19 ]
 
 [node name="Tile15" parent="." instance=ExtResource( 3 )]
@@ -81,7 +81,7 @@ position = Vector2( 0, 144 )
 adjacent = [ 12, 21 ]
 
 [node name="Tile17" parent="." instance=ExtResource( 3 )]
-position = Vector2( 48, 144 )
+position = Vector2( 72, 144 )
 adjacent = [ 13, 18, 21 ]
 
 [node name="Tile18" parent="." instance=ExtResource( 3 )]
@@ -89,7 +89,7 @@ position = Vector2( 144, 144 )
 adjacent = [ 17, 19, 25 ]
 
 [node name="Tile19" parent="." instance=ExtResource( 3 )]
-position = Vector2( 240, 144 )
+position = Vector2( 216, 144 )
 adjacent = [ 14, 18, 27 ]
 
 [node name="Tile20" parent="." instance=ExtResource( 3 )]

@@ -11,7 +11,6 @@ script = ExtResource( 2 )
 [node name="BoardLayer" type="CanvasLayer" parent="."]
 
 [node name="Board" parent="BoardLayer" instance=ExtResource( 1 )]
-position = Vector2( 170, 150 )
 
 [node name="ObjectLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -20,9 +19,11 @@ layer = 2
 layer = 3
 
 [node name="TopPanel" parent="GUILayer" instance=ExtResource( 3 )]
+visible = false
 margin_bottom = 98.0
 
 [node name="EndTurn" type="Button" parent="GUILayer"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
