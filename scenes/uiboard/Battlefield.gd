@@ -17,3 +17,7 @@ func _on_Tile2_gui_input(event):
 
 func _on_Tile3_gui_input(event):
     _tile_input(2, event)
+
+
+func _on_Tile4_gui_input(event):
+    _tile_input(3, event)

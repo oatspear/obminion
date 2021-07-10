@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://scripts/battle/BattleMechanics.gd"
 }, {
 "base": "Resource",
+"class": "BoardTileTextures",
+"language": "GDScript",
+"path": "res://scripts/data/BoardTileTextures.gd"
+}, {
+"base": "Resource",
 "class": "MinionData",
 "language": "GDScript",
 "path": "res://scripts/data/Minion.gd"
 } ]
 _global_script_class_icons={
 "BattleMechanics": "",
+"BoardTileTextures": "",
 "MinionData": ""
 }
 
