@@ -4,7 +4,8 @@ extends Node2D
 # Constants
 ################################################################################
 
-const FRAME_PATH = "res://assets/minions/%d/spriteframes.tres"
+const FRAME_PATH: String = "res://assets/minions/%d/spriteframes.tres"
+const SPRITE_Y_OFFSET: int = -8
 
 ################################################################################
 # Signals
@@ -69,15 +70,15 @@ func exit_bench():
     yield(_sprite, "animation_finished")
 # warning-ignore:return_value_discarded
     _tween.interpolate_property(_sprite, "position:y",
-        0, -80, 0.5,
-        Tween.TRANS_QUAD, Tween.EASE_OUT)
+        SPRITE_Y_OFFSET, -80 + SPRITE_Y_OFFSET, 0.5,
+        Tween.TRANS_SINE, Tween.EASE_OUT)
     #_tween.interpolate_property(self, "modulate:a",
     #    255, 0, 0.5,
     #    Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 # warning-ignore:return_value_discarded
     _tween.start()
     yield(_tween, "tween_all_completed")
-    _sprite.position.y = 0
+    _sprite.position.y = SPRITE_Y_OFFSET
     #self.modulate.a = 255
     visible = false
     call_deferred("emit_signal", "animation_finished")
@@ -85,13 +86,13 @@ func exit_bench():
 func enter_battlefield(target_position: Vector2):
     visible = true
     global_position = target_position
-    _sprite.position.y = -80
+    _sprite.position.y = -80 + SPRITE_Y_OFFSET
     _sprite.animation = "fall"
     _sprite.stop()
 # warning-ignore:return_value_discarded
     _tween.interpolate_property(_sprite, "position:y",
-        -80, 0, 0.5,
-        Tween.TRANS_QUAD, Tween.EASE_IN)
+        -80 + SPRITE_Y_OFFSET, SPRITE_Y_OFFSET, 0.5,
+        Tween.TRANS_SINE, Tween.EASE_IN)
     #_tween.interpolate_property(self, "modulate:a",
     #    0, 255, 0.5,
     #    Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

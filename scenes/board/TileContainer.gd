@@ -10,7 +10,7 @@ signal tile_selected(i)
 # Internal State
 ################################################################################
 
-onready var tiles = get_children()
+onready var tiles = $Tiles.get_children()
 
 ################################################################################
 # Interface

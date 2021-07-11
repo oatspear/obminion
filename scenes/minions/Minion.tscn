@@ -15,6 +15,7 @@ animations = [ {
 script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -8 )
 frames = SubResource( 1 )
 offset = Vector2( 0, -20 )
 

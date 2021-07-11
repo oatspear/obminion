@@ -36,3 +36,7 @@ func _on_Area2D_input_event(_viewport, event, _shape_idx):
         if event.button_index == BUTTON_LEFT:
             if event.pressed:
                 print("Clicked Sprite")
+
+
+func _on_Button_pressed():
+    print("Button pressed")

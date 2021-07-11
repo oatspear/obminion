@@ -4,10 +4,10 @@ extends Sprite
 # Constants
 ################################################################################
 
-const HIGHLIGHT_COLOR_FRIEND: Color = Color(0, 1, 0)
-const HIGHLIGHT_COLOR_EMPTY: Color = Color(1, 1, 0)
-const HIGHLIGHT_COLOR_BATTLE: Color = Color(1, 0, 0)
-const NORMAL_COLOR: Color = Color(1, 1, 1)
+const NORMAL_PACK: Resource = preload("res://data/ui/tile-normal.tres")
+const RESOURCE_PACK: Resource = preload("res://data/ui/tile-resource.tres")
+const SPAWN_PACK: Resource = preload("res://data/ui/tile-spawn.tres")
+const BASE_PACK: Resource = preload("res://data/ui/tile-base.tres")
 
 ################################################################################
 # Signals
@@ -27,6 +27,7 @@ export (int) var player_owner: int = -1
 export (bool) var ui_enabled: bool = false
 
 var ui_data = null
+var _texture_pack: Resource = null
 
 
 ################################################################################
@@ -38,14 +39,20 @@ func is_empty():
 
 func set_normal():
     tile_type = Global.TileType.NORMAL
+    _texture_pack = NORMAL_PACK
+    texture = _texture_pack.texture_default
 
 func set_spawn(pi: int = -1):
     tile_type = Global.TileType.SPAWN
     player_owner = pi
+    _texture_pack = SPAWN_PACK
+    texture = _texture_pack.texture_default
 
 func set_base(pi: int = -1):
     tile_type = Global.TileType.BASE
     player_owner = pi
+    _texture_pack = BASE_PACK
+    texture = _texture_pack.texture_default
 
 func is_normal_tile():
     return tile_type == Global.TileType.NORMAL
@@ -58,43 +65,53 @@ func is_base_tile():
 
 func highlight_friend():
     if minion == null:
-        modulate = HIGHLIGHT_COLOR_EMPTY
+        texture = _texture_pack.texture_highlight
     else:
-        modulate = HIGHLIGHT_COLOR_FRIEND
+        texture = _texture_pack.texture_friend
 
 func highlight_enemy():
     if minion == null:
-        modulate = HIGHLIGHT_COLOR_EMPTY
+        texture = _texture_pack.texture_highlight
     else:
-        modulate = HIGHLIGHT_COLOR_BATTLE
+        texture = _texture_pack.texture_enemy
 
 func enable_selection(data=null):
     ui_enabled = true
     ui_data = data
-    if minion == null:
-        modulate = HIGHLIGHT_COLOR_EMPTY
-    else:
-        modulate = HIGHLIGHT_COLOR_FRIEND
+    highlight_friend()
 
 func enable_inspection(data=null):
     ui_enabled = true
     ui_data = data
-    modulate = HIGHLIGHT_COLOR_EMPTY
+    texture = _texture_pack.texture_highlight
 
 func enable_targeting(data=null):
     ui_enabled = true
     ui_data = data
-    modulate = HIGHLIGHT_COLOR_BATTLE
+    texture = _texture_pack.texture_enemy
 
 func disable_tile():
     ui_enabled = false
     ui_data = null
-    modulate = NORMAL_COLOR
+    texture = _texture_pack.texture_default
 
 
 ################################################################################
 # Event Callbacks
 ################################################################################
+
+func _ready():
+    match tile_type:
+        Global.TileType.NORMAL:
+            _texture_pack = NORMAL_PACK
+        Global.TileType.BASE:
+            _texture_pack = BASE_PACK
+        Global.TileType.SPAWN:
+            _texture_pack = SPAWN_PACK
+        _:
+            assert(false)
+    texture = _texture_pack.texture_default
+
 
 func _on_Area2D_input_event(_viewport, event, _shape_idx):
     if (event is InputEventMouseButton and event.button_index == BUTTON_LEFT

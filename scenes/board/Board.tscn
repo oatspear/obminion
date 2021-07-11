@@ -4,24 +4,23 @@
 [ext_resource path="res://scenes/board/Board.gd" type="Script" id=2]
 [ext_resource path="res://scenes/board/BottomPlayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/board/TopPlayer.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/board-16p.png" type="Texture" id=5]
+[ext_resource path="res://assets/board/paths.png" type="Texture" id=5]
 
 [node name="Board" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
-visible = false
-position = Vector2( 314, 164 )
+position = Vector2( 320, 192 )
 texture = ExtResource( 5 )
 
 [node name="Top" parent="." instance=ExtResource( 4 )]
-position = Vector2( 27, 59 )
+position = Vector2( 176, 48 )
 
 [node name="Battlefield" parent="." instance=ExtResource( 1 )]
-position = Vector2( 171, 68 )
+position = Vector2( 176, 96 )
 
 [node name="Bottom" parent="." instance=ExtResource( 3 )]
-position = Vector2( 519, 227 )
+position = Vector2( 176, 344 )
 
 [connection signal="bench_tile_selected" from="Top" to="." method="_on_Top_bench_tile_selected"]
 [connection signal="grave_tile_selected" from="Top" to="." method="_on_Top_grave_tile_selected"]
