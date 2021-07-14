@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/uiboard/Tile.tscn" type="PackedScene" id=1]
+
+[node name="Bench" type="CenterContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Frame" type="PanelContainer" parent="."]
+margin_left = 133.0
+margin_top = 157.0
+margin_right = 507.0
+margin_bottom = 203.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Frame"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 367.0
+margin_bottom = 39.0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tile" parent="Frame/HBoxContainer" instance=ExtResource( 1 )]
+margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="Tile2" parent="Frame/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 48.0
+margin_right = 80.0
+margin_bottom = 32.0
+
+[node name="Tile3" parent="Frame/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
+
+[node name="VSeparator" type="VSeparator" parent="Frame/HBoxContainer"]
+margin_left = 144.0
+margin_right = 148.0
+margin_bottom = 32.0
+
+[node name="Tile7" parent="Frame/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 164.0
+margin_right = 196.0
+margin_bottom = 32.0
+
+[node name="VSeparator2" type="VSeparator" parent="Frame/HBoxContainer"]
+margin_left = 212.0
+margin_right = 216.0
+margin_bottom = 32.0
+
+[node name="Tile4" parent="Frame/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 232.0
+margin_right = 264.0
+margin_bottom = 32.0
+
+[node name="Tile5" parent="Frame/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 280.0
+margin_right = 312.0
+margin_bottom = 32.0
+
+[node name="Tile6" parent="Frame/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 328.0
+margin_right = 360.0
+margin_bottom = 32.0

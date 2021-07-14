@@ -13,7 +13,7 @@ const BASE_PACK: Resource = preload("res://data/ui/tile-base.tres")
 # Signals
 ################################################################################
 
-signal tile_selected()
+signal tile_selected(i)
 
 ################################################################################
 # Internal State
@@ -21,7 +21,8 @@ signal tile_selected()
 
 var minion: Node2D = null
 var tile_index: int = 0
-export (Array, int) var adjacent = []
+# export (Array, int)
+var adjacent: Array = []
 export (Global.TileType) var tile_type = Global.TileType.NORMAL
 export (int) var player_owner: int = -1
 export (bool) var ui_enabled: bool = false
@@ -33,6 +34,12 @@ var _texture_pack: Resource = null
 ################################################################################
 # Interface
 ################################################################################
+
+func global_x():
+    return rect_global_position.x + rect_size.x / 2
+
+func global_y():
+    return rect_global_position.y + rect_size.y / 2
 
 func is_empty():
     return minion == null
@@ -110,20 +117,11 @@ func _ready():
             _texture_pack = SPAWN_PACK
         _:
             assert(false)
-    if tile_type != Global.TileType.NORMAL:
-        match player_owner:
-            0:
-                texture = _texture_pack.texture_friend
-            1:
-                texture = _texture_pack.texture_enemy
-            _:
-                texture = _texture_pack.texture_default
-    else:
-        texture = _texture_pack.texture_default
+    texture = _texture_pack.texture_default
 
 func _on_Tile_gui_input(event):
     if event is InputEventMouseButton:
         if event.button_index == BUTTON_LEFT and event.pressed:
             if ui_enabled:
-                print("Clicked %s; contains %s" % [name, minion])
-                emit_signal("tile_selected")
+                print("Clicked tile %d; contains %s" % [tile_index, minion])
+                emit_signal("tile_selected", tile_index)

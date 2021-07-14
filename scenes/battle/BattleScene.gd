@@ -98,13 +98,13 @@ func _set_battlefield_tiles(field_view, field_state):
             assert(minion_state.location == Global.BoardLocation.BATTLEFIELD)
             assert(minion_state.position == i)
             if tile_state.is_base():
-                var hero_view = HERO_SCENE.instance()
-                hero_view.set_state(minion_state)
-                hero_view.tile_index = i
-                object_layer.add_child(hero_view)
+                #var hero_view = HERO_SCENE.instance()
+                #hero_view.set_state(minion_state)
+                #hero_view.tile_index = i
+                #object_layer.add_child(hero_view)
                 assert(tile_view.tile_type == Global.TileType.BASE)
-                field_view.place_minion(hero_view, i)
-                _heroes[tile_view.player_owner] = hero_view
+                #field_view.place_minion(hero_view, i)
+                #_heroes[tile_view.player_owner] = hero_view
             else:
                 var minion_view = MINION_SCENE.instance()
                 minion_view.set_state(minion_state)

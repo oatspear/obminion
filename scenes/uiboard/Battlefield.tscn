@@ -12,32 +12,160 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Tiles" type="TextureRect" parent="."]
 margin_left = 160.0
 margin_top = 68.0
 margin_right = 480.0
 margin_bottom = 292.0
 texture = ExtResource( 4 )
 
-[node name="Tile1" parent="TextureRect" instance=ExtResource( 1 )]
-tile_type = 1
-player_owner = 1
+[node name="Tile0" parent="Tiles" instance=ExtResource( 1 )]
 
-[node name="Tile2" parent="TextureRect" instance=ExtResource( 1 )]
+[node name="Tile1" parent="Tiles" instance=ExtResource( 1 )]
 margin_left = 48.0
 margin_right = 48.0
 
-[node name="Tile3" parent="TextureRect" instance=ExtResource( 1 )]
+[node name="Tile2" parent="Tiles" instance=ExtResource( 1 )]
 margin_left = 96.0
 margin_right = 96.0
 
-[node name="Tile4" parent="TextureRect" instance=ExtResource( 1 )]
+[node name="Tile3" parent="Tiles" instance=ExtResource( 1 )]
 margin_left = 144.0
 margin_right = 144.0
-tile_type = 2
-player_owner = 1
 
-[connection signal="gui_input" from="TextureRect/Tile1" to="." method="_on_Tile1_gui_input"]
-[connection signal="gui_input" from="TextureRect/Tile2" to="." method="_on_Tile2_gui_input"]
-[connection signal="gui_input" from="TextureRect/Tile3" to="." method="_on_Tile3_gui_input"]
-[connection signal="gui_input" from="TextureRect/Tile4" to="." method="_on_Tile4_gui_input"]
+[node name="Tile4" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 192.0
+margin_right = 224.0
+margin_bottom = 32.0
+
+[node name="Tile5" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 240.0
+margin_right = 272.0
+margin_bottom = 32.0
+
+[node name="Tile6" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+
+[node name="Tile7" parent="Tiles" instance=ExtResource( 1 )]
+margin_top = 48.0
+margin_right = 32.0
+margin_bottom = 80.0
+
+[node name="Tile8" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 64.0
+margin_top = 48.0
+margin_right = 96.0
+margin_bottom = 80.0
+
+[node name="Tile9" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 144.0
+margin_top = 48.0
+margin_right = 176.0
+margin_bottom = 80.0
+
+[node name="Tile10" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 224.0
+margin_top = 48.0
+margin_right = 256.0
+margin_bottom = 80.0
+
+[node name="Tile11" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 288.0
+margin_top = 48.0
+margin_right = 320.0
+margin_bottom = 80.0
+
+[node name="Tile12" parent="Tiles" instance=ExtResource( 1 )]
+margin_top = 96.0
+margin_right = 32.0
+margin_bottom = 128.0
+
+[node name="Tile13" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 96.0
+margin_bottom = 128.0
+
+[node name="Tile14" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 224.0
+margin_top = 96.0
+margin_right = 256.0
+margin_bottom = 128.0
+
+[node name="Tile15" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 288.0
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 128.0
+
+[node name="Tile16" parent="Tiles" instance=ExtResource( 1 )]
+margin_top = 144.0
+margin_right = 32.0
+margin_bottom = 176.0
+
+[node name="Tile17" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 64.0
+margin_top = 144.0
+margin_right = 96.0
+margin_bottom = 176.0
+
+[node name="Tile18" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 144.0
+margin_top = 144.0
+margin_right = 176.0
+margin_bottom = 176.0
+
+[node name="Tile19" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 224.0
+margin_top = 144.0
+margin_right = 256.0
+margin_bottom = 176.0
+
+[node name="Tile20" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 288.0
+margin_top = 144.0
+margin_right = 320.0
+margin_bottom = 176.0
+
+[node name="Tile21" parent="Tiles" instance=ExtResource( 1 )]
+margin_top = 192.0
+margin_right = 32.0
+margin_bottom = 224.0
+
+[node name="Tile22" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 48.0
+margin_top = 192.0
+margin_right = 80.0
+margin_bottom = 224.0
+
+[node name="Tile23" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 96.0
+margin_top = 192.0
+margin_right = 128.0
+margin_bottom = 224.0
+
+[node name="Tile24" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 144.0
+margin_top = 192.0
+margin_right = 176.0
+margin_bottom = 224.0
+
+[node name="Tile25" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 192.0
+margin_top = 192.0
+margin_right = 224.0
+margin_bottom = 224.0
+
+[node name="Tile26" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 240.0
+margin_top = 192.0
+margin_right = 272.0
+margin_bottom = 224.0
+
+[node name="Tile27" parent="Tiles" instance=ExtResource( 1 )]
+margin_left = 288.0
+margin_top = 192.0
+margin_right = 320.0
+margin_bottom = 224.0
