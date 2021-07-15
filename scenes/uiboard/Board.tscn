@@ -14,41 +14,41 @@ __meta__ = {
 
 [node name="HBox" type="HBoxContainer" parent="."]
 margin_left = 45.0
-margin_top = 4.0
+margin_top = 6.0
 margin_right = 595.0
-margin_bottom = 356.0
+margin_bottom = 354.0
 custom_constants/separation = 16
 
 [node name="Left" type="VBoxContainer" parent="HBox"]
 margin_right = 96.0
-margin_bottom = 352.0
+margin_bottom = 348.0
 custom_constants/separation = 64
 alignment = 1
 
 [node name="TBD" parent="HBox/Left" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 16.0
+margin_top = 14.0
 margin_right = 96.0
-margin_bottom = 144.0
+margin_bottom = 142.0
 rect_min_size = Vector2( 96, 128 )
 
 [node name="TBD2" parent="HBox/Left" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 208.0
+margin_top = 206.0
 margin_right = 96.0
-margin_bottom = 336.0
+margin_bottom = 334.0
 rect_min_size = Vector2( 96, 128 )
 
 [node name="Center" type="MarginContainer" parent="HBox"]
 margin_left = 112.0
 margin_right = 432.0
-margin_bottom = 352.0
+margin_bottom = 348.0
 
 [node name="VBox" type="VBoxContainer" parent="HBox/Center"]
 margin_right = 320.0
-margin_bottom = 352.0
+margin_bottom = 348.0
 custom_constants/separation = 0
 
 [node name="TopBench" parent="HBox/Center/VBox" instance=ExtResource( 1 )]
@@ -74,65 +74,49 @@ margin_right = 320.0
 margin_bottom = 348.0
 custom_constants/margin_top = 12
 
+[node name="EndTurnButton" type="Button" parent="HBox/Center"]
+margin_left = 126.0
+margin_top = 164.0
+margin_right = 193.0
+margin_bottom = 184.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "End Turn"
+
 [node name="Right" type="VBoxContainer" parent="HBox"]
 margin_left = 448.0
 margin_right = 550.0
-margin_bottom = 352.0
+margin_bottom = 348.0
 alignment = 1
 
 [node name="TBD" parent="HBox/Right" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_top = 10.0
 margin_right = 102.0
-margin_bottom = 96.0
+margin_bottom = 106.0
 rect_min_size = Vector2( 96, 96 )
 
-[node name="VBox" type="VBoxContainer" parent="HBox/Right"]
-margin_top = 100.0
-margin_right = 102.0
-margin_bottom = 252.0
-
-[node name="Graveyard" parent="HBox/Right/VBox" instance=ExtResource( 3 )]
+[node name="Graveyard" parent="HBox/Right" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_top = 110.0
 margin_right = 102.0
-margin_bottom = 62.0
+margin_bottom = 172.0
 custom_constants/margin_top = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBox/Right/VBox"]
-margin_top = 66.0
-margin_right = 102.0
-margin_bottom = 86.0
-
-[node name="HSeparator" type="HSeparator" parent="HBox/Right/VBox/HBoxContainer"]
-margin_right = 13.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="HBox/Right/VBox/HBoxContainer"]
-margin_left = 17.0
-margin_right = 84.0
-margin_bottom = 20.0
-text = "End Turn"
-
-[node name="HSeparator2" type="HSeparator" parent="HBox/Right/VBox/HBoxContainer"]
-margin_left = 88.0
-margin_right = 102.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="Graveyard2" parent="HBox/Right/VBox" instance=ExtResource( 3 )]
+[node name="Graveyard2" parent="HBox/Right" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 90.0
+margin_top = 176.0
 margin_right = 102.0
-margin_bottom = 152.0
+margin_bottom = 238.0
 custom_constants/margin_top = 16
 
 [node name="TBD2" parent="HBox/Right" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 256.0
+margin_top = 242.0
 margin_right = 102.0
-margin_bottom = 352.0
+margin_bottom = 338.0
 rect_min_size = Vector2( 96, 96 )
