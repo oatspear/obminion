@@ -103,6 +103,12 @@ func disable_tile():
     texture = _texture_pack.texture_default
 
 
+func place_minion(m: Node2D):
+    minion = m
+    m.set_screen_position(global_x(), global_y())
+    return true
+
+
 ################################################################################
 # Event Callbacks
 ################################################################################

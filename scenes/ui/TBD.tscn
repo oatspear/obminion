@@ -1,0 +1,21 @@
+[gd_scene format=2]
+
+[node name="TBD" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 633.0
+margin_bottom = 353.0
+
+[node name="Label" type="Label" parent="CenterContainer"]
+margin_left = 300.0
+margin_top = 166.0
+margin_right = 326.0
+margin_bottom = 180.0
+text = "TBD"

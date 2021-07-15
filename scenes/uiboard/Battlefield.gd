@@ -1,16 +1,16 @@
-extends CenterContainer
+extends MarginContainer
 
 ################################################################################
 # Signals
 ################################################################################
 
-signal field_tile_selected(i)
+signal battlefield_tile_selected(i)
 
 ################################################################################
 # Internal State
 ################################################################################
 
-onready var tiles = $Tiles.get_children()
+onready var tiles = $Margin/Tiles.get_children()
 
 ################################################################################
 # Interface
@@ -120,4 +120,4 @@ func _ready():
 
 func _on_tile_selected(i: int):
     print("Tile %d is selected" % i)
-    emit_signal("field_tile_selected", i)
+    emit_signal("battlefield_tile_selected", i)

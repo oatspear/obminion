@@ -45,6 +45,11 @@ func set_state(state: Reference):
     species_uid = state.species.uid
     species_name = state.species.name
 
+func set_screen_position(x: int, y: int):
+    global_position.x = x
+    global_position.y = y
+    return true
+
 
 func move_to_tile(tile: Node2D):
     tile_index = tile.tile_index
