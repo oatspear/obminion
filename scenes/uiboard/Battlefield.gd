@@ -17,11 +17,7 @@ onready var tiles = $Margin/Tiles.get_children()
 ################################################################################
 
 func place_minion(minion: Node2D, i: int):
-    var tile = tiles[i]
-    assert(tile.minion == null, "tile is not empty")
-    tile.minion = minion
-    minion.global_position.x = tile.global_x()
-    minion.global_position.y = tile.global_y()
+    return tiles[i].place_minion(minion)
 
 
 func find_minion(minion: Node2D):

@@ -36,9 +36,8 @@ func enqueue_minion(minion):
         return first
 
 func place_minion(minion, i: int):
-    var tile = tiles[i]
-    assert(tile.minion == null, "tile is not empty")
-    return tile.place_minion(minion)
+    print("Tile position %s" % tiles[i].rect_global_position)
+    return tiles[i].place_minion(minion)
 
 
 func find_minion(minion: Node2D):

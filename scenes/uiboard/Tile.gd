@@ -35,30 +35,29 @@ var _texture_pack: Resource = null
 # Interface
 ################################################################################
 
-func global_x():
+func screen_x():
     return rect_global_position.x + rect_size.x / 2
 
-func global_y():
+func screen_y():
     return rect_global_position.y + rect_size.y / 2
+
+func screen_position():
+    return rect_global_position + rect_size / 2
 
 func is_empty():
     return minion == null
 
-func set_normal():
-    tile_type = Global.TileType.NORMAL
-    _texture_pack = NORMAL_PACK
-    texture = _texture_pack.texture_default
-
-func set_spawn(pi: int = -1):
-    tile_type = Global.TileType.SPAWN
-    player_owner = pi
-    _texture_pack = SPAWN_PACK
-    texture = _texture_pack.texture_default
-
-func set_base(pi: int = -1):
-    tile_type = Global.TileType.BASE
-    player_owner = pi
-    _texture_pack = BASE_PACK
+func set_tile_type(t: int):
+    tile_type = t
+    match t:
+        Global.TileType.NORMAL:
+            _texture_pack = NORMAL_PACK
+        Global.TileType.BASE:
+            _texture_pack = BASE_PACK
+        Global.TileType.SPAWN:
+            _texture_pack = SPAWN_PACK
+        _:
+            assert(false)
     texture = _texture_pack.texture_default
 
 func is_normal_tile():
@@ -103,9 +102,10 @@ func disable_tile():
     texture = _texture_pack.texture_default
 
 
-func place_minion(m: Node2D):
-    minion = m
-    m.set_screen_position(global_x(), global_y())
+func place_minion(minion: Node2D):
+    assert(self.minion == null, "tile is not empty")
+    self.minion = minion
+    minion.set_screen_position(screen_x(), screen_y())
     return true
 
 

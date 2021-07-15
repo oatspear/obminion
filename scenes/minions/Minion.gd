@@ -48,12 +48,13 @@ func set_state(state: Reference):
 func set_screen_position(x: int, y: int):
     global_position.x = x
     global_position.y = y
+    print("%s set position (%d, %d)" % [name, x, y])
     return true
 
 
-func move_to_tile(tile: Node2D):
+func move_to_tile(tile: Node):
     tile_index = tile.tile_index
-    return move_to(tile.global_position)
+    return move_to(tile.screen_position())
 
 func move_to(target_position: Vector2, duration: float = 1.0):
     var err = _tween.connect("tween_all_completed", self,

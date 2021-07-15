@@ -46,7 +46,8 @@ var _anim_queue: Array = []
 # more or less constant after setting
 var _this_player: int = -1
 var _enemy_player: int = -1
-var _player_areas: Array = [null, null]
+var _benches: Array = [null, null]
+var _graveyards: Array = [null, null]
 var _heroes: Array = [null, null]
 var _minions: Array = [[], []]
 
@@ -67,8 +68,10 @@ func set_player_index(i: int):
     var ei = (i + 1) % 2
     _this_player = i
     _enemy_player = ei
-    _player_areas[i] = board.this_player
-    _player_areas[ei] = board.enemy_player
+    _benches[i] = board.player_bench
+    _benches[ei] = board.enemy_bench
+    _graveyards[i] = board.player_graveyard
+    _graveyards[ei] = board.enemy_graveyard
 
 # @pre: called after set_player_index()
 func set_battle_board(board_state: Reference):
@@ -80,9 +83,8 @@ func set_battle_board(board_state: Reference):
     for i in range(len(board_state.players)):
         print("[DEBUG] board_state.players[%d]" % i)
         var player_state = board_state.players[i]
-        var player_view = _player_areas[i]
-        _set_benched_minions(player_view.bench, player_state.bench)
-        _set_graveyard_minions(player_view.graveyard, player_state.graveyard)
+        _set_benched_minions(_benches[i], player_state.bench)
+        _set_graveyard_minions(_graveyards[i], player_state.graveyard)
 
 
 func _set_battlefield_tiles(field_view, field_state):
@@ -90,9 +92,9 @@ func _set_battlefield_tiles(field_view, field_state):
     for i in range(len(field_state.tiles)):
         var tile_state = field_state.tiles[i]
         var tile_view = field_view.tiles[i]
-        tile_view.tile_type = tile_state.tile_type
+        tile_view.set_tile_type(tile_state.tile_type)
         tile_view.player_owner = tile_state.owner
-        assert(tile_view.adjacent == tile_state.adjacent)
+        tile_view.adjacent = tile_state.adjacent.duplicate()
         var minion_state = tile_state.minion
         if minion_state != null:
             assert(minion_state.location == Global.BoardLocation.BATTLEFIELD)
@@ -169,7 +171,7 @@ func _process(_delta):
     _play_next_animation()
 
 
-func _on_Board_field_tile_selected(ti):
+func _on_Board_battlefield_tile_selected(ti):
     match _ui_state:
         UIState.MAIN_ACTION:
             _main_action_field_tile_selected(ti)
@@ -181,6 +183,18 @@ func _on_Board_field_tile_selected(ti):
             _select_spawn_field_tile_selected(ti)
         _:
             pass
+
+# warning-ignore:unused_argument
+func _on_Board_enemy_graveyard_tile_selected(ti):
+    if _ui_state == UIState.MAIN_ACTION:
+        var minion = board.enemy_graveyard.tiles[ti].minion
+        minion_info_modal.show_minion(minion)
+
+# warning-ignore:unused_argument
+func _on_Board_player_graveyard_tile_selected(ti):
+    if _ui_state == UIState.MAIN_ACTION:
+        var minion = board.player_graveyard.tiles[ti].minion
+        minion_info_modal.show_minion(minion)
 
 func _on_Board_player_bench_tile_selected(ti):
     match _ui_state:
@@ -197,22 +211,10 @@ func _on_Board_player_bench_tile_selected(ti):
 func _on_Board_enemy_bench_tile_selected(ti):
     match _ui_state:
         UIState.MAIN_ACTION:
-            var minion = board.enemy_player.bench.tiles[ti].minion
+            var minion = board.enemy_bench.tiles[ti].minion
             minion_info_modal.show_minion(minion)
         _:
             pass
-
-# warning-ignore:unused_argument
-func _on_Board_player_grave_tile_selected(ti):
-    if _ui_state == UIState.MAIN_ACTION:
-        var minion = board.this_player.graveyard.tiles[ti].minion
-        minion_info_modal.show_minion(minion)
-
-# warning-ignore:unused_argument
-func _on_Board_enemy_grave_tile_selected(ti):
-    if _ui_state == UIState.MAIN_ACTION:
-        var minion = board.enemy_player.graveyard.tiles[ti].minion
-        minion_info_modal.show_minion(minion)
 
 func _on_EndTurn_pressed():
     assert(_ui_state != UIState.PASSIVE)
@@ -689,11 +691,11 @@ func _anim_minion_entered_battlefield(pi, mi, ti):
     if _spawn_issued:
         minion.board_location = Global.BoardLocation.BATTLEFIELD
         minion.tile_index = ti
-        minion.enter_battlefield(tile.global_position)
+        minion.enter_battlefield(tile.screen_position())
         yield(minion, "animation_finished")
     else:
         # FIXME
-        minion.global_position = tile.global_position
+        minion.global_position = tile.screen_position()
         minion.board_location = Global.BoardLocation.BATTLEFIELD
         minion.tile_index = ti
         minion.visible = true
@@ -705,13 +707,13 @@ func _anim_minion_entered_bench(pi, mi, ti):
     print("[P%d](%d) Entered bench at %d" % [pi, mi, ti])
     # We are going to diverge from logic here
     var minion = _minions[pi][mi]
-    var tile = _player_areas[pi].bench.tiles[minion.minion_index]
+    var tile = _benches[pi].tiles[minion.minion_index]
     assert(tile.minion == null)
     assert(minion.player_owner == pi)
     assert(minion.minion_index == mi)
     tile.minion = minion
     # FIXME
-    minion.global_position = tile.global_position
+    minion.global_position = tile.screen_position()
     minion.board_location = Global.BoardLocation.BENCH
     minion.tile_index = minion.minion_index
     minion.visible = true
@@ -720,7 +722,7 @@ func _anim_minion_entered_bench(pi, mi, ti):
 func _anim_minion_entered_graveyard(pi, mi, ti):
     yield()
     print("[P%d](%d) Entered graveyard at %d" % [pi, mi, ti])
-    var tile = _player_areas[pi].graveyard.tiles[ti]
+    var tile = _graveyards[pi].tiles[ti]
     var minion = _minions[pi][mi]
     assert(tile.minion == null)
     assert(minion.player_owner == pi)
@@ -731,19 +733,19 @@ func _anim_minion_entered_graveyard(pi, mi, ti):
     #assert(minion != null)
     #battlefield.tiles[i].minion = null
     #if minion.player_owner == _this_player:
-    #    var first = board.this_player.graveyard.enqueue_minion(minion)
+    #    var first = board.player_graveyard.enqueue_minion(minion)
     #    if first != null:
-    #        var nil = board.this_player.bench.enqueue_minion(first)
+    #        var nil = board.player_bench.enqueue_minion(first)
     #        assert(nil == null)
     #else:
     #    assert(minion.player_owner == _enemy_player)
-    #    var first = board.enemy_player.graveyard.enqueue_minion(minion)
+    #    var first = board.enemy_graveyard.enqueue_minion(minion)
     #    if first != null:
-    #        var nil = board.enemy_player.bench.enqueue_minion(first)
+    #        var nil = board.enemy_bench.enqueue_minion(first)
     #        assert(nil == null)
     ####################################
     # FIXME
-    minion.global_position = tile.global_position
+    minion.global_position = tile.screen_position()
     minion.board_location = Global.BoardLocation.GRAVEYARD
     minion.tile_index = ti
     minion.visible = true
@@ -770,7 +772,7 @@ func _anim_minion_exited_bench(pi, mi, bi):
     print("[P%d](%d) Exited bench" % [pi, mi])
     var minion = _minions[pi][mi]
     # must use find because we diverged from logic above
-    var tile = _player_areas[pi].bench.find_minion(minion)
+    var tile = _benches[pi].find_minion(minion)
     assert(tile != null)
     assert(tile.minion == minion)
     assert(minion.player_owner == pi)
@@ -788,7 +790,7 @@ func _anim_minion_exited_graveyard(pi, mi, gi):
     yield()
     print("[P%d](%d) Exited graveyard" % [pi, mi])
     var minion = _minions[pi][mi]
-    var tile = _player_areas[pi].graveyard.find_minion(minion)
+    var tile = _graveyards[pi].find_minion(minion)
     assert(tile != null)
     assert(tile.minion == minion)
     assert(minion.player_owner == pi)
@@ -842,7 +844,7 @@ func _main_action_field_tile_selected(ti: int):
 
 
 func _main_action_bench_tile_selected(ti: int):
-    var tile = board.this_player.bench.tiles[ti]
+    var tile = board.player_bench.tiles[ti]
     var minion = tile.minion
     assert(minion != null)
     assert(minion.player_owner == _this_player)
@@ -976,7 +978,7 @@ func _enable_main_input():
                 assert(tile.minion == minion)
                 tile.enable_selection()
             elif minion.board_location == Global.BoardLocation.BENCH:
-                var tile = board.this_player.bench.tiles[ti]
+                var tile = board.player_bench.tiles[ti]
                 assert(tile.minion == minion)
                 tile.enable_selection()
     # allow inspection of enemy minions
@@ -995,7 +997,7 @@ func _enable_combat_input():
     end_turn_button.disabled = false
 
 func _block_player_input():
-    board.this_player.bench.disable_all_tiles()
+    board.player_bench.disable_all_tiles()
     battlefield.disable_all_tiles()
     end_turn_button.disabled = true
     # reset internal variables; discard temporary data
@@ -1014,12 +1016,12 @@ func _enable_minion_tile_inspection():
             tile.enable_inspection()
             _highlighted_tiles.append(tile)
         elif minion.board_location == Global.BoardLocation.BENCH:
-            var tile = board.enemy_player.bench.tiles[ti]
+            var tile = board.enemy_bench.tiles[ti]
             assert(tile.minion == minion)
             tile.enable_inspection()
             _highlighted_tiles.append(tile)
         elif minion.board_location == Global.BoardLocation.GRAVEYARD:
-            var tile = board.enemy_player.graveyard.tiles[ti]
+            var tile = board.enemy_graveyard.tiles[ti]
             assert(tile.minion == minion)
             tile.enable_inspection()
             _highlighted_tiles.append(tile)
@@ -1036,4 +1038,4 @@ func _show_combat_text(ti, value, crit=false):
     var gui_layer = $GUILayer
     var tile = battlefield.tiles[ti]
     gui_layer.add_child(fct)
-    fct.show_value(str(value), tile.global_position, crit)
+    fct.show_value(str(value), tile.screen_position(), crit)
