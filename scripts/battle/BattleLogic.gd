@@ -182,7 +182,7 @@ func set_player_deck(i: int, player_data: Resource):
     assert(c.species != null)
     assert(c.location == Global.BoardLocation.BATTLEFIELD)
     c.position = p.base_point
-    board.tiles[c.position].minion = c
+    #board.tiles[c.position].minion = c
     assert(len(p.minions) > 0)
     for i in range(len(p.minions)):
         var m = p.minions[i]
