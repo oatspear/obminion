@@ -40,7 +40,7 @@ const BOARD = "res://scripts/battle/Board.gd"
 # signal ready_check(pid)
 signal battle_set_up(board_data)
 signal battle_started()
-signal battle_ended()
+signal battle_ended(pi)
 signal turn_order_chosen(pis)
 signal turn_started(pi)
 signal turn_ended(pi)
@@ -341,8 +341,12 @@ func _step_action_move():
     var ti = _arg_minion.position
     emit_signal("movement_issued", _pi, ti, _arg_path)
     board.move_along_path(ti, _arg_path)
-    emit_signal("main_phase_ended", _pi)
-    _next = BattleState.COMBAT_PHASE
+    var landing_tile = board.tiles[_arg_minion.position]
+    if landing_tile.is_base() and landing_tile.owner != _pi:
+        _end_battle(_pi)
+    else:
+        emit_signal("main_phase_ended", _pi)
+        _next = BattleState.COMBAT_PHASE
     return true
 
 func _step_action_attack():
@@ -447,7 +451,7 @@ func _step_raid_resolve():
     _arg_minion.health -= dp
     emit_signal("minion_damaged", _arg_minion.position, dp)
     if _arg_target.health <= 0:
-        _end_battle()
+        _end_battle(_arg_minion.owner)
     if _arg_minion.health <= 0:
         _minion_death(_arg_minion)
     else:
@@ -517,8 +521,8 @@ func _minion_death(minion: Reference):
     _signal_player_indicators(board.players[_pi])
 
 
-func _end_battle():
-    emit_signal("battle_ended")
+func _end_battle(winner):
+    emit_signal("battle_ended", winner)
     board = null
     _next = BattleState.FINAL
     _arg_minion = null

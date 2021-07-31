@@ -231,9 +231,9 @@ func on_battle_started():
     assert(anim is GDScriptFunctionState)
     _anim_queue.append(anim)
 
-func on_battle_ended():
+func on_battle_ended(pi):
 # warning-ignore:function_may_yield
-    _anim_queue.append(_anim_battle_ended())
+    _anim_queue.append(_anim_battle_ended(pi))
 
 func on_turn_order_chosen(pis):
 # warning-ignore:function_may_yield
@@ -421,9 +421,9 @@ func _anim_battle_started():
     print("Battle started!")
     _on_animation_finished()
 
-func _anim_battle_ended():
+func _anim_battle_ended(pi):
     yield()
-    print("Battle ended!")
+    print("Battle ended! Winner is %d" % pi)
     _on_animation_finished()
 
 func _anim_turn_order_chosen(pis):
