@@ -68,6 +68,11 @@ func get_path(i: int, j: int, n: int):
         return []
     return paths[j]
 
+func get_paths_n_steps(i: int, n: int):
+    var key_value_paths = _get_paths(i, n)
+    key_value_paths.erase(i)
+    return key_value_paths.values()
+
 func is_spawn_point(i: int):
     return tiles[i].is_spawn()
 

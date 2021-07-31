@@ -36,6 +36,7 @@ func start_battle(battle_data: Resource):
     ai_player.ai = battle_data.ai_script.new()
     ai_player.ai.player_index = AI_ID
     ai_player.ai.game_logic = logic
+    ai_player.ai.initialize()
     scene.set_player_index(PLAYER_ID)
     _logic_events()
     logic.start()

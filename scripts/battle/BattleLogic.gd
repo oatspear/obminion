@@ -196,7 +196,18 @@ func set_player_deck(i: int, player_data: Resource):
 
 
 ################################################################################
-# Interface
+# Interface - Query
+################################################################################
+
+func is_main_phase_input():
+    return state == BattleState.INPUT_MAIN
+
+func is_combat_phase_input():
+    return state == BattleState.INPUT_COMBAT
+
+
+################################################################################
+# Interface - State Transitions
 ################################################################################
 
 func start():
