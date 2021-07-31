@@ -83,6 +83,7 @@ margin_right = 193.0
 margin_bottom = 184.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+disabled = true
 text = "End Turn"
 
 [node name="Right" type="VBoxContainer" parent="HBox"]
@@ -126,5 +127,6 @@ rect_min_size = Vector2( 96, 96 )
 [connection signal="bench_tile_selected" from="HBox/Center/VBox/EnemyBench" to="." method="_on_EnemyBench_bench_tile_selected"]
 [connection signal="battlefield_tile_selected" from="HBox/Center/VBox/Battlefield" to="." method="_on_Battlefield_battlefield_tile_selected"]
 [connection signal="bench_tile_selected" from="HBox/Center/VBox/PlayerBench" to="." method="_on_PlayerBench_bench_tile_selected"]
+[connection signal="pressed" from="HBox/Center/EndTurnButton" to="." method="_on_EndTurnButton_pressed"]
 [connection signal="graveyard_tile_selected" from="HBox/Right/EnemyGraveyard" to="." method="_on_EnemyGraveyard_graveyard_tile_selected"]
 [connection signal="graveyard_tile_selected" from="HBox/Right/PlayerGraveyard" to="." method="_on_PlayerGraveyard_graveyard_tile_selected"]

@@ -9,6 +9,7 @@ signal enemy_graveyard_tile_selected(tile_index)
 signal player_bench_tile_selected(tile_index)
 signal enemy_bench_tile_selected(tile_index)
 signal battlefield_tile_selected(tile_index)
+signal end_turn_pressed()
 
 ################################################################################
 # Internal State
@@ -19,6 +20,7 @@ onready var enemy_graveyard = $HBox/Right/EnemyGraveyard
 onready var player_bench = $HBox/Center/VBox/PlayerBench
 onready var player_graveyard = $HBox/Right/PlayerGraveyard
 onready var battlefield = $HBox/Center/VBox/Battlefield
+onready var end_turn_button = $HBox/Center/EndTurnButton
 
 ################################################################################
 # Event Callbacks
@@ -38,3 +40,6 @@ func _on_EnemyGraveyard_graveyard_tile_selected(i):
 
 func _on_PlayerGraveyard_graveyard_tile_selected(i):
     emit_signal("player_graveyard_tile_selected", i)
+
+func _on_EndTurnButton_pressed():
+    emit_signal("end_turn_pressed")

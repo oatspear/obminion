@@ -45,6 +45,7 @@ __meta__ = {
 visible = false
 
 [connection signal="battlefield_tile_selected" from="BoardLayer/Board" to="." method="_on_Board_battlefield_tile_selected"]
+[connection signal="end_turn_pressed" from="BoardLayer/Board" to="." method="_on_EndTurn_pressed"]
 [connection signal="enemy_bench_tile_selected" from="BoardLayer/Board" to="." method="_on_Board_enemy_bench_tile_selected"]
 [connection signal="enemy_graveyard_tile_selected" from="BoardLayer/Board" to="." method="_on_Board_enemy_graveyard_tile_selected"]
 [connection signal="player_bench_tile_selected" from="BoardLayer/Board" to="." method="_on_Board_player_bench_tile_selected"]

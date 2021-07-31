@@ -35,7 +35,7 @@ signal action_end_turn()
 onready var board = $BoardLayer/Board
 onready var battlefield = board.battlefield
 onready var object_layer = $ObjectLayer
-onready var end_turn_button = $GUILayer/EndTurn
+onready var end_turn_button = board.end_turn_button #$GUILayer/EndTurn
 onready var minion_info_modal = $GUILayer/MinionInfoModal
 onready var top_panel = $GUILayer/TopPanel
 
