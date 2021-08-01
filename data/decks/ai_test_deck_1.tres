@@ -1,13 +1,17 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://scripts/data/PlayerDeck.gd" type="Script" id=1]
 [ext_resource path="res://data/minions/Minion1.tres" type="Resource" id=2]
 [ext_resource path="res://data/commanders/Commander1.tres" type="Resource" id=3]
 [ext_resource path="res://data/minions/Minion2.tres" type="Resource" id=4]
+[ext_resource path="res://data/minions/Minion3.tres" type="Resource" id=5]
+[ext_resource path="res://data/minions/Minion4.tres" type="Resource" id=6]
+[ext_resource path="res://data/minions/Minion5.tres" type="Resource" id=7]
+[ext_resource path="res://data/minions/Minion6.tres" type="Resource" id=8]
 
 [resource]
 script = ExtResource( 1 )
 name = "AI Player"
 commander = ExtResource( 3 )
-minions = [ ExtResource( 2 ), ExtResource( 4 ) ]
+minions = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
 spells = [  ]

@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource( 1 )
-uid = 2
-name = "Minion2"
-power = 3
-health = 5
-movement = 1
+uid = 1
+name = "Minion5"
+power = 2
+health = 2
+movement = 3
 supply_cost = 1
