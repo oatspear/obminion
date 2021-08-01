@@ -143,7 +143,14 @@ func _eval_move(args):
     return 1
 
 func _eval_attack(args):
-    return 1
+    var minion = args[0]
+    var enemy = game_logic.board.get_active_minion_at(args[1])
+    var score = 0
+    if enemy.power >= minion.health:
+        score -= 1
+    if enemy.health <= minion.power:
+        score += 1
+    return score
 
 
 ################################################################################
